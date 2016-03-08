@@ -1,0 +1,58 @@
+library(caret)
+
+data <- read.csv("pml-training.csv")
+
+FilterData <- data[,colSums(is.na(data)) == 0]
+FilterData <- FilterData[,8:dim(FilterData)[2]]
+FilterData <- FilterData[, sapply(FilterData, is.numeric)]
+tmp <- cor(FilterData[1:dim(FilterData)[2]])
+
+remove <- findCorrelation(tmp, cutoff = 0.80, verbose = TRUE)
+FilterData <- FilterData[,-remove]
+FilterData[["class"]] <- data$class
+
+set.seed(1992912)
+inTrain <- createDataPartition(y=FilterData$class,p=0.7,list=FALSE)
+
+Training <- FilterData[inTrain,]
+Testing <- FilterData[-inTrain,]
+
+PredictionMethod <-c("gbm","treebag","nb","rpart")
+n = 1
+Accuracy <- c(0,0,0,0)
+for (pm in PredictionMethod[1:2]) {
+
+	mod <- train(class ~ ., method=pm,data=Training)
+	pre <- predict(mod,newdata=Testing)
+	print(pm)
+	Imp <- varImp(mod,scale = FALSE)
+	print(Imp)
+	print(confusionMatrix(pre,Testing$class))
+	performance <- confusionMatrix(pre,Testing$class)
+	Accuracy[n] <- performance$overall[1]
+	if (n > 1) {
+		if (Accuracy[n] > Accuracy[n-1]) {
+			UsedMod <- mod
+		}
+	} else {
+		UsedMod <- mod
+	}
+	n <- n + 1
+
+}
+
+testdata <- read.csv("pml-testing.csv")
+
+testpre <- predict(UsedMod,newdata=testdata)
+print(testpre)
+
+modrf <- train(class ~ ., method='rf',data=Training)
+prerf <- predict(modrf,newdata=Testing)
+print("random forest")
+Imprf <- varImp(modrf, scale = FALSE)
+print(Imprf)
+print(confusionMatrix(prerf,Testing$class))
+testpre <- predict(modrf,newdata=testdata)
+print(testpre)
+
+plot(Imprf, top = 20)

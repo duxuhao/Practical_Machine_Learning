@@ -1,0 +1,244 @@
+[1] "rpart"
+rpart variable importance
+
+  only 20 most important variables shown (out of 39)
+
+                     Overall
+magnet_belt_y         1154.3
+total_accel_belt       997.2
+yaw_belt               929.2
+magnet_dumbbell_y      919.6
+magnet_arm_x           768.2
+pitch_forearm          743.6
+roll_forearm           600.0
+magnet_dumbbell_z      413.5
+gyros_belt_z           359.7
+magnet_belt_z          333.1
+roll_dumbbell          287.8
+magnet_dumbbell_x      279.5
+accel_dumbbell_y       212.3
+accel_forearm_x        177.3
+magnet_forearm_z       158.9
+yaw_dumbbell             0.0
+roll_arm                 0.0
+pitch_arm                0.0
+total_accel_dumbbell     0.0
+total_accel_arm          0.0
+Confusion Matrix and Statistics
+          Reference
+Prediction    A    B    C    D    E
+         A 1539  494  498  375  240
+         B   29  384   28  163  202
+         C   70  122  428  129  153
+         D   36  137   72  215  126
+         E    0    2    0   82  361
+
+Overall Statistics
+                                          
+               Accuracy : 0.4974          
+                 95% CI : (0.4845, 0.5102)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.3425          
+ Mcnemar's Test P-Value : < 2.2e-16       
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9194  0.33714  0.41715  0.22303  0.33364
+Specificity            0.6184  0.91108  0.90245  0.92461  0.98251
+Pos Pred Value         0.4892  0.47643  0.47450  0.36689  0.81124
+Neg Pred Value         0.9507  0.85135  0.87999  0.85865  0.86746
+Prevalence             0.2845  0.19354  0.17434  0.16381  0.18386
+Detection Rate         0.2615  0.06525  0.07273  0.03653  0.06134
+Detection Prevalence   0.5346  0.13696  0.15327  0.09958  0.07562
+Balanced Accuracy      0.7689  0.62411  0.65980  0.57382  0.65808
+
+
+[1] "gbm"
+gbm variable importance
+
+  only 20 most important variables shown (out of 39)
+
+                  Overall
+pitch_forearm      1496.1
+yaw_belt           1360.4
+magnet_dumbbell_z  1187.1
+magnet_belt_y       992.8
+magnet_belt_z       838.7
+gyros_belt_z        837.8
+magnet_dumbbell_y   716.4
+roll_forearm        664.0
+roll_dumbbell       464.1
+total_accel_belt    362.1
+gyros_dumbbell_y    358.2
+magnet_dumbbell_x   297.7
+accel_forearm_x     290.9
+accel_dumbbell_y    282.6
+accel_forearm_z     241.9
+magnet_forearm_z    193.2
+magnet_arm_z        187.0
+roll_arm            165.5
+yaw_arm             161.8
+pitch_dumbbell      159.8
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1644   52    0    1    1
+         B   17 1023   34    2   11
+         C    3   49  963   27   13
+         D    8    8   27  921   12
+         E    2    7    2   13 1045
+
+Overall Statistics
+                                          
+               Accuracy : 0.9509          
+                 95% CI : (0.9451, 0.9563)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.9379          
+ Mcnemar's Test P-Value : 8.014e-06       
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9821   0.8982   0.9386   0.9554   0.9658
+Specificity            0.9872   0.9865   0.9811   0.9888   0.9950
+Pos Pred Value         0.9682   0.9411   0.9128   0.9436   0.9775
+Neg Pred Value         0.9928   0.9758   0.9870   0.9912   0.9923
+Prevalence             0.2845   0.1935   0.1743   0.1638   0.1839
+Detection Rate         0.2794   0.1738   0.1636   0.1565   0.1776
+Detection Prevalence   0.2885   0.1847   0.1793   0.1658   0.1816
+Balanced Accuracy      0.9846   0.9423   0.9598   0.9721   0.9804
+
+
+[1] "treebag"
+treebag variable importance
+
+  only 20 most important variables shown (out of 39)
+
+                     Overall
+yaw_belt              3700.4
+magnet_dumbbell_z     2505.4
+magnet_dumbbell_y     2338.9
+gyros_belt_z          2146.2
+magnet_belt_z         2006.4
+magnet_belt_y         1985.6
+pitch_forearm         1912.0
+roll_forearm          1848.2
+accel_dumbbell_y      1764.3
+roll_dumbbell         1715.1
+magnet_dumbbell_x     1578.9
+total_accel_belt      1482.1
+magnet_belt_x         1374.4
+magnet_forearm_z      1164.1
+magnet_arm_x          1126.4
+yaw_arm                990.6
+yaw_dumbbell           986.1
+total_accel_dumbbell   951.8
+accel_forearm_x        948.8
+roll_arm               919.5
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1665   16    0    4    1
+         B    5 1105    7    0    2
+         C    2   16 1000   13    3
+         D    2    2   16  947    6
+         E    0    0    3    0 1070
+
+
+Overall Statistics
+                                          
+               Accuracy : 0.9833          
+                 95% CI : (0.9797, 0.9865)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.9789          
+ Mcnemar's Test P-Value : 0.009824        
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9946   0.9701   0.9747   0.9824   0.9889
+Specificity            0.9950   0.9971   0.9930   0.9947   0.9994
+Pos Pred Value         0.9875   0.9875   0.9671   0.9733   0.9972
+Neg Pred Value         0.9979   0.9929   0.9946   0.9965   0.9975
+Prevalence             0.2845   0.1935   0.1743   0.1638   0.1839
+Detection Rate         0.2829   0.1878   0.1699   0.1609   0.1818
+Detection Prevalence   0.2865   0.1901   0.1757   0.1653   0.1823
+Balanced Accuracy      0.9948   0.9836   0.9838   0.9885   0.9941
+
+First Prediction
+
+ [1] B A B A A E D B A A B C B A E E A B B B
+Levels: A B C D E
+
+[random Forest]
+
+rf variable importance
+
+  only 20 most important variables shown (out of 39)
+
+                     Overall
+yaw_belt              1223.3
+pitch_forearm          966.1
+magnet_dumbbell_z      808.0
+magnet_dumbbell_y      630.7
+roll_forearm           568.1
+magnet_belt_y          516.9
+gyros_belt_z           395.5
+magnet_belt_z          392.5
+accel_dumbbell_y       367.5
+roll_dumbbell          342.5
+magnet_dumbbell_x      336.8
+total_accel_dumbbell   306.3
+roll_arm               276.3
+accel_forearm_x        264.2
+magnet_belt_x          256.6
+accel_forearm_z        251.2
+yaw_dumbbell           230.1
+magnet_forearm_z       224.3
+magnet_arm_x           215.2
+yaw_arm                208.7
+
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1673   10    0    0    0
+         B    1 1119    5    0    0
+         C    0    9 1011    8    3
+         D    0    0   10  956    4
+         E    0    1    0    0 1075
+
+Overall Statistics
+                                          
+               Accuracy : 0.9913          
+                 95% CI : (0.9886, 0.9935)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.989           
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9994   0.9824   0.9854   0.9917   0.9935
+Specificity            0.9976   0.9987   0.9959   0.9972   0.9998
+Pos Pred Value         0.9941   0.9947   0.9806   0.9856   0.9991
+Neg Pred Value         0.9998   0.9958   0.9969   0.9984   0.9985
+Prevalence             0.2845   0.1935   0.1743   0.1638   0.1839
+Detection Rate         0.2843   0.1901   0.1718   0.1624   0.1827
+Detection Prevalence   0.2860   0.1912   0.1752   0.1648   0.1828
+Balanced Accuracy      0.9985   0.9906   0.9906   0.9944   0.9967
+
+ [1] B A B A A E D B A A B C B A E E A B B B
+Levels: A B C D E
+
