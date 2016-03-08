@@ -59,4 +59,73 @@ testpre <- predict(UsedMod,newdata=testdata)
 print(testpre)
 ##
 
-I choose the first 4 comonly used method for predicting and print out the accuracy of each method. I made a loop If the accuracy of this method
+I choose the first 4 comonly used method for predicting and print out the accuracy of each method. I made a loop
+for training and if the accuracy of this method is higher than the last method, the method will be marked down and
+the method with the highest accuracy will be puck up, which turns out to be the "treebag" method. The accuracies 
+are marked in the Model_Performance_result.txt file the here is the one of the "treebag" method:
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1665   16    0    4    1
+         B    5 1105    7    0    2
+         C    2   16 1000   13    3
+         D    2    2   16  947    6
+         E    0    0    3    0 1070
+
+
+Overall Statistics
+                                          
+               Accuracy : 0.9833          
+                 95% CI : (0.9797, 0.9865)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.9789          
+ Mcnemar's Test P-Value : 0.009824        
+ 
+ whose predicted value is 
+ 
+ First Prediction
+
+ [1] B A B A A E D B A A B C B A E E A B B B
+Levels: A B C D E
+
+And I also use the "random Forest" method to do the classification:
+
+##
+modrf <- train(class ~ ., method='rf',data=Training)
+prerf <- predict(modrf,newdata=Testing)
+print("random forest")
+Imprf <- varImp(modrf, scale = FALSE)
+print(Imprf)
+print(confusionMatrix(prerf,Testing$class))
+testpre <- predict(modrf,newdata=testdata)
+print(testpre)
+##
+
+The training result is followed:
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1673   10    0    0    0
+         B    1 1119    5    0    0
+         C    0    9 1011    8    3
+         D    0    0   10  956    4
+         E    0    1    0    0 1075
+
+Overall Statistics
+                                          
+               Accuracy : 0.9913          
+                 95% CI : (0.9886, 0.9935)
+    No Information Rate : 0.2845          
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.989           
+ Mcnemar's Test P-Value : NA              
+
+the accuracy is a bit higher than the tree bag method (99.1% > 98.3%) and they got the same prediction result from the testing set
+
+ [1] B A B A A E D B A A B C B A E E A B B B
+Levels: A B C D E
+
+So here is the result I got from this data set.
