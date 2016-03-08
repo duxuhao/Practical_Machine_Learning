@@ -1,7 +1,62 @@
 This is the description of the assignment for unit Practical_machine_learning 
 Here is the process I deal with the data
-<pre><code>
-  library(caret)
-
+##
+library(caret)
 data <- read.csv("pml-training.csv")
-</code></pre>
+FilterData <- data[,colSums(is.na(data)) == 0]
+FilterData <- FilterData[,8:dim(FilterData)[2]]
+FilterData <- FilterData[, sapply(FilterData, is.numeric)]
+tmp <- cor(FilterData[1:dim(FilterData)[2]])
+remove <- findCorrelation(tmp, cutoff = 0.80, verbose = TRUE)
+FilterData <- FilterData[,-remove]
+FilterData[["class"]] <- data$class
+##
+
+Here, I read the training data and preprocess the data frame with the following step:
+1. Remove the column with too many NaN value, since there are too many invalid value in it;
+2. Delete the column with non-digit value, which cannot be used for predicting as the value is non-digit;
+3. Delete the first few column as they are label of time the user;
+4. Put the class column back to the data frame.
+
+##
+set.seed(1992912)
+inTrain <- createDataPartition(y=FilterData$class,p=0.7,list=FALSE)
+
+Training <- FilterData[inTrain,]
+Testing <- FilterData[-inTrain,]
+##
+
+And then, I put 70% of data into the training set and 30% into the test set
+
+##
+PredictionMethod <-c("gbm","treebag","nb","rpart")
+n = 1
+Accuracy <- c(0,0,0,0)
+for (pm in PredictionMethod[1:2]) {
+
+	mod <- train(class ~ ., method=pm,data=Training)
+	pre <- predict(mod,newdata=Testing)
+	print(pm)
+	Imp <- varImp(mod,scale = FALSE)
+	print(Imp)
+	print(confusionMatrix(pre,Testing$class))
+	performance <- confusionMatrix(pre,Testing$class)
+	Accuracy[n] <- performance$overall[1]
+	if (n > 1) {
+		if (Accuracy[n] > Accuracy[n-1]) {
+			UsedMod <- mod
+		}
+	} else {
+		UsedMod <- mod
+	}
+	n <- n + 1
+
+}
+
+testdata <- read.csv("pml-testing.csv")
+
+testpre <- predict(UsedMod,newdata=testdata)
+print(testpre)
+##
+
+I choose the first 4 comonly used method for predicting and print out the accuracy of each method. I made a loop If the accuracy of this method
